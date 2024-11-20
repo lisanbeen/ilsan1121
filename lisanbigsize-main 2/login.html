@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        .user-form {
+            margin-top: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .user-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .user-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container a {
+            margin: 0 10px;
+            padding: 10px 30px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+        }
+        .banner {
+            background-color: #ffffff;
+            color: #000;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .banner button {
+            background: #721c24;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+
+    <div id="page-wrapper">
+
+        <header id="header">
+            <h1>일산장신들</h1>
+        </header>
+
+     
+        <article id="main">
+            <section class="wrapper style5">
+                <div class="inner">
+                    <h3>사용자 로그인 / 회원가입</h3>
+                    <p>아래에서 로그인 유형을 선택하세요:</p>
+
+                    <!-- 유형-->
+                    <div class="button-container">
+                        <a href="#" id="guest-login">게스트로 로그인</a>
+                        <a href="#" id="developer-login">개발자로 로그인</a>
+                    </div>
+
+                    <!-- 회원가입 배너 -->
+                    <div class="banner" id="signup-banner" style="display: none;">
+                        본 회원가입 절차는 사용자의 신분을 확인하고 로그인하기 위한 과정입니다. 학번과 이름은 관리자에 의해 확인될 수 있지만,<br/> 비밀번호는 관리자에게 제공되지 않습니다. 개인정보는 로그인 및 페이지 사용 시에만 활용되며, 그 외의 목적에는 사용되지 않습니다.
+                        <button id="close-banner">닫기</button>
+                    </div>
+
+                    <!-- 로그인 및 회원가입  -->
+                    <div class="user-form" id="user-form" style="display: none;">
+                        <input type="text" id="user-id-name" placeholder="학번과 이름 (예: 10101-카리나)" />
+                        <input type="password" id="user-password" placeholder="비밀번호 입력" />
+                        <button class="button primary" id="submit-signup-login">로그인 / 회원가입</button>
+                        <p class="message" id="form-message" style="color: red; display: none;"></p>
+                        <P>회원가입시 로그인/회원가입 버튼을 2번 눌러 주세요 <br/>학번하고 이름사이에 "-" 를 치셔야 회원가입 및 로그인이 가능합니다.<br/>예 10101-카리나</P>
+                    </div>
+
+                    <!-- 개발자 비밀번호 입력 -->
+                    <div class="password-form" id="password-form" style="display: none;">
+                        <input type="password" id="developer-password" placeholder="개발자 비밀번호 입력" />
+                        <button class="button" id="submit-password">개발자 로그인</button>
+                        <p id="error-message" style="color: red; display: none;">비밀번호가 틀렸습니다. 다시 시도하세요.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- 푸터 -->
+        <footer id="footer">
+            <!-- 불필요한 아이콘과 링크 제거 -->
+            <ul class="copyright">
+                <li>&copy; 2024 ilsanbigsize inc.</li><li>Design: <a href="">ilsan bigsize</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <!-- 스크립트 -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // 페이지 로드 시 배너 표시 여부 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const userId = localStorage.getItem('currentUserId'); // 현재 로그인된 사용자의 ID를 저장
+
+            // 배너가 이미 닫혔거나 사용자가 이미 회원가입 되어 있는지 확인
+            const bannerClosed = localStorage.getItem('bannerClosed');
+            const userExists = allUsers.some(user => user.id === userId);
+
+            if (!bannerClosed && !userExists) {
+                document.getElementById('signup-banner').style.display = 'block'; // 배너 표시
+            } else {
+                document.getElementById('signup-banner').style.display = 'none'; // 배너 숨기기
+            }
+        });
+
+        // 배너 닫기 버튼 클릭 시 배너 숨기고 로컬 스토리지에 상태 저장
+        document.getElementById('close-banner').addEventListener('click', function() {
+            document.getElementById('signup-banner').style.display = 'none';
+            localStorage.setItem('bannerClosed', 'true');
+        });
+
+       // 게스트 로그인 버튼 클릭 시 로그인/회원가입 폼 표시
+        document.getElementById('guest-login').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('user-form').style.display = 'block'; // 로그인/회원가입 폼 표시
+            document.getElementById('password-form').style.display = 'none'; // 개발자 비밀번호 폼 숨기기 
+        });
+
+        // 개발자 로그인 버튼 클릭 시 비밀번호 폼 표시
+        document.getElementById('developer-login').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('password-form').style.display = 'block'; // 개발자 비밀번호 폼 표시
+            document.getElementById('user-form').style.display = 'none'; // 로그인/회원가입 폼 숨기기
+        });
+
+        // 폼 제출 버튼 클릭 시
+        document.getElementById('submit-signup-login').addEventListener('click', function() {
+            const input = document.getElementById('user-id-name').value;
+            const password = document.getElementById('user-password').value;
+
+            // 학번과 이름 추출
+            const inputParts = input.split('-');
+            const userId = inputParts[0]; // 학번
+            const userName = inputParts[1]; // 이름
+
+            // 학번은 5자리 숫자, 이름은 2~4글자 한글
+            const idPattern = /^\d{5}$/;
+            const namePattern = /^[가-힣]{2,4}$/;
+
+            if (!idPattern.test(userId) || !namePattern.test(userName)) {
+                document.getElementById('form-message').innerText = '학번 또는 이름 형식이 잘못되었습니다. 학번: 5자리 숫자, 이름: 2~4글자 한글';
+                document.getElementById('form-message').style.display = 'block';
+                return;
+            }
+
+            if (password.length < 4) {
+                document.getElementById('form-message').innerText = '비밀번호는 4자 이상이어야 합니다.';
+                document.getElementById('form-message').style.display = 'block';
+                return;
+            }
+
+            // 로컬 스토리지에서 사용자 정보 가져오기
+            const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // 학번으로 사용자 찾기
+            const existingUserById = allUsers.find(user => user.id === userId);
+
+            // 동일 학번이 이미 존재할 때
+            if (existingUserById) {
+                localStorage.setItem('currentUserId', userId); // 현재 로그인된 사용자의 ID 저장
+                if (existingUserById.name !== userName) {
+                    document.getElementById('form-message').innerText = '아이디 또는 비밀번호가 틀렸습니다.';
+                    document.getElementById('form-message').style.display = 'block';
+                } else if (existingUserById.password === password) {
+                    alert('로그인 성공!');
+                    window.location.href = 'main.html'; // 로그인 성공 시 페이지 이동
+                } else {
+                    document.getElementById('form-message').innerText = '아이디 또는 비밀번호가 틀렸습니다.';
+                    document.getElementById('form-message').style.display = 'block';
+                }
+                return;
+            }
+
+            // 동일 이름이 존재하더라도 학번이 다르면 회원가입 가능
+            const existingUserByName = allUsers.find(user => user.name === userName);
+
+            if (existingUserByName && existingUserByName.id !== userId) {
+                // 동일 이름이 있으나 학번이 다를 경우, 회원가입 진행
+                allUsers.push({ id: userId, name: userName, password: password });
+                localStorage.setItem('users', JSON.stringify(allUsers));
+                localStorage.setItem('currentUserId', userId); // 현재 로그인된 사용자의 ID 저장
+                document.getElementById('form-message').innerText = '회원가입이 완료되었습니다. 다시 로그인 해주세요.';
+                document.getElementById('form-message').style.display = 'block';
+            } else {
+                // 회원가입 진행
+                allUsers.push({ id: userId, name: userName, password: password });
+                localStorage.setItem('users', JSON.stringify(allUsers));
+                localStorage.setItem('currentUserId', userId); // 현재 로그인된 사용자의 ID 저장
+                document.getElementById('form-message').innerText = '회원가입이 완료되었습니다. 다시 로그인 해주세요.';
+                document.getElementById('form-message').style.display = 'block';
+            }
+        });
+
+        // 개발자 비밀번호 제출 버튼 클릭 시
+        document.getElementById('submit-password').addEventListener('click', function() {
+            const password = document.getElementById('developer-password').value;
+            const correctPassword = 'lisanbigsizekey'; // 실제 비밀번호로 대체
+
+            if (password === correctPassword) {
+                window.location.href = 'developer.html'; // 비밀번호가 맞으면 developer.html로 이동
+            } else {
+                document.getElementById('error-message').style.display = 'block'; // 비밀번호가 틀리면 오류 메시지 표시
+            }
+        });
+    </script>
+
+</body>
+</html>

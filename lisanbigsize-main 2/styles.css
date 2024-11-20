@@ -1,0 +1,132 @@
+/* 기본 스타일 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+main {
+  padding: 10px;
+}
+
+/* 스크롤 가능한 스토리 섹션 */
+.scrollable {
+  display: flex;
+  overflow-x: scroll;
+  padding: 10px 0;
+}
+
+.scrollable div {
+  margin-right: 10px;
+}
+
+/* 섹션 스타일 */
+section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* 네비게이션 바 */
+footer nav {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+footer nav button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #333;
+}
+
+footer nav button:hover {
+  color: #007bff;
+}
+
+/* 드롭다운 메뉴 */
+#dropdown-menu {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+}
+
+.dropdown-item {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* 게시물 */
+.post {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.post img {
+  max-width: 95%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 메모 */
+.memo {
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.memo .content {
+  font-size: 0.9em;
+}
+
+.memo .emoji {
+  font-size: 1.2em;
+  margin-left: auto;
+}

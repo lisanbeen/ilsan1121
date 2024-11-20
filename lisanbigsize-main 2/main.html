@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주엽 에타</title>
+    <link rel="stylesheet" href="assets/css/guest.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            background-color: #2c2c2c;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+        #logo {
+            text-align: center;
+        }
+        #logo .image {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto;
+        }
+        #logo h1 {
+            margin: 10px 0 0 0;
+            font-size: 1.5em;
+        }
+        #logo p {
+            margin: 0;
+            font-size: 1em;
+        }
+        #nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+        #nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+        }
+        #nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        #nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+        #nav ul li a:hover {
+            background-color: #444;
+            border-radius: 5px;
+        }
+        #main {
+            padding: 40px 0;
+            background-color: #ffffff;
+        }
+        section {
+            padding: 60px 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .story-gallery, .post-grid, .memo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .story-item, .post-item, .memo-item {
+            width: 150px; /* 스토리 한 줄에 5개씩 들어가도록 크기 조정 */
+            height: 150px; /* 스토리 한 줄에 5개씩 들어가도록 크기 조정 */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f7f7;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .story-item img, .post-item img {
+            width: 100%;
+            height: 100%; /* 스토리 이미지를 전체 크기에 맞게 조정 */
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+        .story-item:hover, .post-item:hover, .memo-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .post-slider {
+            position: relative;
+            width: 100%;
+        }
+        .post-slider img {
+            width: 100%;
+            height: auto;
+        }
+        .post-content {
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 10px 10px;
+        }
+        .post-slider .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .post-slider .slider-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .add-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+        #memo textarea {
+            width: 100%;
+            max-width: 600px;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+            display: block;
+        }
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <!-- Header -->
+    <div id="header">
+        <div id="logo">
+    
+            <h1 id="title">사용자</h1>
+            <p>juyeop highschool student</p>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="#story" id="story-link">스토리</a></li>
+                <li><a href="#posts" id="posts-link">게시물</a></li>
+                <li><a href="#memo" id="memo-link">메모</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- Story Section -->
+        <section id="story" class="two">
+            <div class="container">
+                <header>
+                    <h2>스토리</h2>
+                </header>
+                <label for="story-upload" class="add-button">스토리 추가</label>
+                <input type="file" id="story-upload" accept="image/*">
+                <div class="story-gallery">
+                    <div class="no-content-message">스토리가 없습니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <section id="posts" class="three">
+            <div class="container">
+                <header>
+                    <h2>게시물</h2>
+                </header>
+                <label for="post-upload" class="add-button">게시물 추가</label>
+                <input type="file" id="post-upload" accept="image/*" multiple>
+                <div id="post-form">
+                    <textarea id="post-content" placeholder="게시물 내용을 입력하세요..."></textarea>
+                    <button id="add-post" class="add-button">게시물 올리기</button>
+                </div>
+                <div class="post-grid">
+                    <div class="no-content-message">게시물이 없습니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memo Section -->
+        <section id="memo" class="four">
+            <div class="container">
+                <header>
+                    <h2>메모</h2>
+                </header>
+                <textarea id="memo-input" name="memo" placeholder="여기에 메모를 작성하세요..."></textarea>
+                <button id="add-memo" class="add-button">메모 올리기</button>
+                <div class="memo-list">
+                    <div class="no-content-message">메모가 없습니다.</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>&copy; Untitled. All rights reserved.</li>
+            <li>Design:</a></li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const storyInput = document.getElementById('story-upload');
+            const postInput = document.getElementById('post-upload');
+            const addPostBtn = document.getElementById('add-post');
+            const addMemoBtn = document.getElementById('add-memo');
+            const storyGallery = document.querySelector('.story-gallery');
+            const postGrid = document.querySelector('.post-grid');
+            const memoList = document.querySelector('.memo-list');
+            let storyItems = [];
+
+            function updateStoryGallery() {
+                storyGallery.innerHTML = '';
+                storyItems.forEach(storyItem => {
+                    storyGallery.appendChild(storyItem);
+                });
+
+                if (storyItems.length === 0) {
+                    const noContentMessage = document.createElement('div');
+                    noContentMessage.classList.add('no-content-message');
+                    noContentMessage.textContent = '스토리가 없습니다.';
+                    storyGallery.appendChild(noContentMessage);
+                }
+            }
+
+            storyInput.addEventListener('change', function() {
+                const file = storyInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const storyItem = document.createElement('div');
+                        storyItem.classList.add('story-item');
+                        storyItem.innerHTML = `<img src="${e.target.result}" alt="Story Image">`;
+                        storyItems.push(storyItem);
+
+                        // 스토리가 100개를 넘으면 가장 오래된 스토리를 삭제
+                        if (storyItems.length > 100) {
+                            storyItems.shift();
+                        }
+
+                        updateStoryGallery();
+                    };
+                    reader.readAsDataURL(file);
+                    storyInput.value = '';
+                }
+            });
+
+            addPostBtn.addEventListener('click', function() {
+                const files = postInput.files;
+                const postContent = document.getElementById('post-content').value;
+                if (files.length > 0 && postContent) {
+                    postGrid.innerHTML = '';
+
+                    const postItem = document.createElement('div');
+                    postItem.classList.add('post-item');
+
+                    const postSlider = document.createElement('div');
+                    postSlider.classList.add('post-slider');
+
+                    Array.from(files).forEach((file, index) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.display = index === 0 ? 'block' : 'none';
+                            postSlider.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+
+                    const sliderControls = document.createElement('div');
+                    sliderControls.classList.add('slider-controls');
+
+                    const prevBtn = document.createElement('button');
+                    prevBtn.textContent = '<';
+                    const nextBtn = document.createElement('button');
+                    nextBtn.textContent = '>';
+
+                    prevBtn.addEventListener('click', function() {
+                        const images = postSlider.querySelectorAll('img');
+                        const visibleImgIndex = Array.from(images).findIndex(img => img.style.display === 'block');
+                        images[visibleImgIndex].style.display = 'none';
+                        images[(visibleImgIndex - 1 + images.length) % images.length].style.display = 'block';
+                    });
+
+                    nextBtn.addEventListener('click', function() {
+                        const images = postSlider.querySelectorAll('img');
+                        const visibleImgIndex = Array.from(images).findIndex(img => img.style.display === 'block');
+                        images[visibleImgIndex].style.display = 'none';
+                        images[(visibleImgIndex + 1) % images.length].style.display = 'block';
+                    });
+
+                    sliderControls.appendChild(prevBtn);
+                    sliderControls.appendChild(nextBtn);
+                    postSlider.appendChild(sliderControls);
+
+                    postItem.appendChild(postSlider);
+
+                    const postText = document.createElement('div');
+                    postText.classList.add('post-content');
+                    postText.textContent = postContent;
+                    postItem.appendChild(postText);
+
+                    postGrid.appendChild(postItem);
+
+                    document.getElementById('post-content').value = '';
+                    postInput.value = '';
+                }
+            });
+
+            addMemoBtn.addEventListener('click', function() {
+                const memoContent = document.getElementById('memo-input').value;
+                if (memoContent) {
+                    memoList.innerHTML = '';
+                    const memoItem = document.createElement('div');
+                    memoItem.classList.add('memo-item');
+                    memoItem.textContent = memoContent;
+                    memoList.appendChild(memoItem);
+                    document.getElementById('memo-input').value = '';
+                }
+            });
+
+            updateStoryGallery();
+        });
+    </script>
+</body>
+</html>

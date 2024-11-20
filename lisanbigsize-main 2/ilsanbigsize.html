@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ilsanbigsize</title>
+    <link rel="stylesheet" href="main/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>ilsanbigsize</h1>
+    </header>
+
+    <main id="home">
+        <section id="story-section">
+            <div class="divider"></div>
+            <h2>스토리</h2>
+            <div id="story-container"></div>
+            <div class="divider"></div>
+        </section>
+
+        <section id="post-section">
+            <div class="divider"></div>
+            <h2>게시물</h2>
+            <div id="post-container"></div>
+            <div class="divider"></div>
+        </section>
+
+        <section id="memo-section">
+            <div class="divider"></div>
+            <h2>메모</h2>
+            <div id="memo-container"></div>
+            <div class="divider"></div>
+        </section>
+    </main>
+
+    <main id="add-section" style="display: none;">
+        <div class="add-options">
+            <button id="add-story-btn">스토리 추가</button>
+            <button id="add-post-btn">게시물 추가</button>
+            <button id="add-memo-btn">메모 추가</button>
+        </div>
+    </main>
+
+    <main id="story-add-section" style="display: none;">
+        <h2>스토리 추가</h2>
+        <input type="file" id="story-image" accept="image/*" />
+        <canvas id="story-canvas" width="400" height="400"></canvas>
+        <button id="upload-story">업로드</button>
+    </main>
+
+    <main id="post-add-section" style="display: none;">
+        <h2>게시물 추가</h2>
+        <input type="file" id="post-image" accept="image/*" />
+        <textarea id="post-description" placeholder="설명을 입력하세요" style="width: 100%; height: 100px; font-size: 1.2em;"></textarea>
+        <button id="upload-post">게시물 업로드</button>
+    </main>
+
+    <main id="memo-add-section" style="display: none;">
+        <h2>메모 추가</h2>
+        <textarea id="memo-input" placeholder="메모를 작성하세요" style="width: 100%; height: 100px; font-size: 1.2em;"></textarea>
+        <button id="save-memo">메모 저장</button>
+    </main>
+
+    <main id="reels-section" style="display: none;">
+        <h1>릴스</h1>
+        <p>아직 영상이 없습니다.</p>
+    </main>
+
+    <main id="my-section" style="display: none;">
+        <h1>마이 페이지</h1>
+        <div id="user-info" style="margin-top: 20px;">
+            <p>불러오는 중..</h3>
+        </div>
+    </main>
+
+    <div id="dropdown-menu" class="hidden">
+        <button class="dropdown-item" data-target="story-section">스토리</button>
+        <button class="dropdown-item" data-target="post-section">게시물</button>
+        <button class="dropdown-item" data-target="memo-section">메모</button>
+    </div>
+
+   
+        <div style="margin-bottom: 15cm;">
+        </div>
+    
+        <ul class="copyright">
+            <p>&copy;2024 ilsanbigsize. Design by Lsb</p>
+        </ul>
+
+    
+
+    <footer>
+        <nav>
+            <button id="home-btn">🏠</button>
+            <button id="dropdown-btn">⬇️</button>
+            <button id="add-btn">➕</button>
+            <button id="reels-btn">🎥</button>
+            <button id="my-btn">👤</button>
+        </nav>
+    </footer>
+
+    <script src="main/main.js"></script>
+</body>
+</html>
